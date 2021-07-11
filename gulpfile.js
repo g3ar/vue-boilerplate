@@ -14,7 +14,6 @@ function buildSCSS() {
   return src(scss_src)
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(concatCss('bundle.css'))
     .pipe(sourcemaps.write())
     .pipe(dest(scss_dest));
 };
