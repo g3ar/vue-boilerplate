@@ -3,7 +3,6 @@ const sass = require('gulp-sass')(require('sass'));
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const browserify = require('browserify');
-const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
@@ -29,16 +28,17 @@ function buildJS() {
   });
 
   return b
-    .transform("babelify", {
+    .transform('babelify', {
         presets: ['@babel/env'],
         plugins: ['@babel/transform-runtime']
     })
+    // .transform('vueify')
     .bundle()
     .pipe(source('./bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(uglify())
-      .on('error', log.error)
+      // .pipe(uglify())
+      // .on('error', log.error)
     .pipe(sourcemaps.write('./'))
     .pipe(dest(js_dest));
 };
