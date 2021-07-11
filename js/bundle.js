@@ -1,0 +1,8 @@
+"use strict";
+
+var hello = function hello(name) {
+  return "hello ".concat(name);
+};
+
+console.info(hello('es2015'));
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbImhlbGxvIiwibmFtZSIsImNvbnNvbGUiLCJpbmZvIl0sIm1hcHBpbmdzIjoiOztBQUFBLElBQU1BLEtBQUssR0FBRyxTQUFSQSxLQUFRLENBQUNDLElBQUQsRUFBVTtBQUNwQix5QkFBZ0JBLElBQWhCO0FBQ0gsQ0FGRDs7QUFJQUMsT0FBTyxDQUFDQyxJQUFSLENBQWFILEtBQUssQ0FBQyxRQUFELENBQWxCIiwiZmlsZSI6ImJ1bmRsZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IGhlbGxvID0gKG5hbWUpID0+IHtcbiAgICByZXR1cm4gYGhlbGxvICR7bmFtZX1gOyBcbn07XG5cbmNvbnNvbGUuaW5mbyhoZWxsbygnZXMyMDE1JykpIl19
