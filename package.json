@@ -1,0 +1,20 @@
+{
+  "name": "vue-boilerplate",
+  "version": "1.0.0",
+  "description": "boilerplate for vue front",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "boilerplate"
+  ],
+  "author": "g3ar",
+  "license": "GPLv3",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.35.2"
+  }
+}
