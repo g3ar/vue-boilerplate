@@ -2,8 +2,8 @@ const { src, dest, watch, parallel } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
-const concatCss = require('gulp-concat-css');
 const concat = require('gulp-concat');
+const minify = require("gulp-babel-minify");
 
 const scss_src = './scss/*.scss';
 const scss_dest = './css';
@@ -26,6 +26,11 @@ function buildJS() {
         plugins: ['@babel/transform-runtime']
     }))
     .pipe(concat('bundle.js'))
+    .pipe(minify({
+      mangle: {
+        keepClassName: true
+      }
+    }))
     .pipe(sourcemaps.write())
     .pipe(dest(js_dest));
 };
