@@ -7,16 +7,18 @@ const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
 const log = require('gulplog');
+const util = require('gulp-util');
 
 const scss_src = './scss/*.scss';
 const scss_dest = './css';
 const js_src = './js_src/*.js'
 const js_dest = './js';
+const production = !!util.env.production;
 
 function buildSCSS() {
   return src(scss_src)
     .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sass({outputStyle: production ? 'compressed' : 'expanded'}).on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(dest(scss_dest));
 };
@@ -24,7 +26,7 @@ function buildSCSS() {
 function buildJS() {
   var b = browserify({
     entries: ['./js_src/index.js'],
-    debug: true
+    debug: !production
   });
 
   return b
@@ -32,13 +34,12 @@ function buildJS() {
         presets: ['@babel/env'],
         plugins: ['@babel/transform-runtime']
     })
-    // .transform('vueify')
+    .transform('vueify')
     .bundle()
     .pipe(source('./bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-      // .pipe(uglify())
-      // .on('error', log.error)
+    .pipe(production ? uglify() : util.noop()).on('error', log.error)
     .pipe(sourcemaps.write('./'))
     .pipe(dest(js_dest));
 };
@@ -48,6 +49,7 @@ function watchSRC() {
   watch(js_src, buildJS);
 }
 
-exports.buildSCSS = buildSCSS
-exports.buildJS = buildJS
-exports.default = watchSRC
+exports.buildSCSS = buildSCSS;
+exports.buildJS = buildJS;
+exports.build = parallel(buildJS, buildSCSS);
+exports.default = watchSRC;
